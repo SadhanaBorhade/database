@@ -1,0 +1,205 @@
+ac@dac-Veriton-M200-H310:~$ sudo mysql -u root -p
+[sudo] password for dac: 
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.34-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE college;
+ERROR 1007 (HY000): Can't create database 'college'; database exists
+mysql> DROP DATABASE college;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> CREATE DATABASE college;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CREATE TABLE student(
+    -> roll int,
+    -> name varchar(15),
+    -> class varchar(10),
+    -> age int,
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 6
+mysql> CREATE TABLE student(
+    -> roll int,
+    -> name varchar(15),
+    -> class varchar(10),
+    -> age int);
+ERROR 1046 (3D000): No database selected
+mysql> USE college
+Database changed
+mysql> CREATE TABLE student( roll int, name varchar(15), class varchar(10), age int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(15) | YES  |     | NULL    |       |
+| class | varchar(10) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> DROP TABLE student
+    -> ;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> CREATE TABLE student( roll int, name varchar(15), class varchar(10),marks float, age int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(15) | YES  |     | NULL    |       |
+| class | varchar(10) | YES  |     | NULL    |       |
+| marks | float       | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student modify column marks int;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(15) | YES  |     | NULL    |       |
+| class | varchar(10) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student drop age;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(15) | YES  |     | NULL    |       |
+| class | varchar(10) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table student drop age;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(15) | YES  |     | NULL    |       |
+| class | varchar(10) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE TABLE teachers(
+    -> name varchar(15),
+    -> subject varchar(15),
+    -> dept varchar(15),
+    -> age int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> truncate table student;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_college |
++-------------------+
+| student           |
+| teachers          |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into student roll,name,class,marks values (1,'Sadhana','FY',95);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'roll,name,class,marks values (1,'Sadhana','FY',95)' at line 1
+mysql> insert into student (roll,name,class,marks) values (1,'Sadhana','FY',95);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student (roll,name,class,marks) values (2,'Shubhangi','SY',54);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student (roll,name,class,marks) values (3,'Shubham','TY',41);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student (roll,name,class,marks) values (4,'Prachi','FY',68);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student;
++------+-----------+-------+-------+
+| roll | name      | class | marks |
++------+-----------+-------+-------+
+|    1 | Sadhana   | FY    |    95 |
+|    2 | Shubhangi | SY    |    54 |
+|    3 | Shubham   | TY    |    41 |
+|    4 | Prachi    | FY    |    68 |
++------+-----------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> truncate table student;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from student;
+Empty set (0.00 sec)
+
+mysql> drop table student;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_college |
++-------------------+
+| teachers          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> drop database college
+    -> ;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| Rajat              |
+| Student            |
+| b1                 |
+| b2db               |
+| information_schema |
+| language           |
+| mobile             |
+| mysql              |
+| performance_schema |
+| pgdac              |
+| project1           |
+| sys                |
+| trendytech         |
++--------------------+
+13 rows in set (0.00 sec)
+
+
+
+

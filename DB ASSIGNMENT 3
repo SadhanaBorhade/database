@@ -1,0 +1,162 @@
+sudo mysql -u root -p;
+[sudo] password for dac: 
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.34-0ubuntu0.22.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| Rajat              |
+| Student            |
+| b1                 |
+| b2db               |
+| information_schema |
+| language           |
+| mobile             |
+| mysql              |
+| performance_schema |
+| pgdac              |
+| project1           |
+| sys                |
+| trendytech         |
++--------------------+
+13 rows in set (0.00 sec)
+
+mysql> create database college;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use college;
+Database changed
+
+mysql> create table student( roll int, class varchar(10), marks float, age int, name varchar(15));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc student
+    -> ;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| class | varchar(10) | YES  |     | NULL    |       |
+| marks | float       | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| name  | varchar(15) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> Insert into student (roll,class,marks,age,name) values (1,'FY',85.42,20,'Riya');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> Insert into student (roll,class,marks,age,name) values (2,'SY',74.21,21,'Siya');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> Insert into student (roll,class,marks,age,name) values (3,'FY',67.34,20,'Ram');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Insert into student (roll,class,marks,age,name) values (4,'TY',94,65,'Piya');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> Insert into student (roll,class,marks,age,name) values (5,'SY',63.4,22,'Tiya');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from student;
++------+-------+-------+------+------+
+| roll | class | marks | age  | name |
++------+-------+-------+------+------+
+|    1 | FY    | 85.42 |   20 | Riya |
+|    2 | SY    | 74.21 |   21 | Siya |
+|    3 | FY    | 67.34 |   20 | Ram  |
+|    4 | TY    |    94 |   65 | Piya |
+|    5 | SY    |  63.4 |   22 | Tiya |
++------+-------+-------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> Delete from student where roll=4;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from student;
++------+-------+-------+------+------+
+| roll | class | marks | age  | name |
++------+-------+-------+------+------+
+|    1 | FY    | 85.42 |   20 | Riya |
+|    2 | SY    | 74.21 |   21 | Siya |
+|    3 | FY    | 67.34 |   20 | Ram  |
+|    5 | SY    |  63.4 |   22 | Tiya |
++------+-------+-------+------+------+
+4 rows in set (0.00 sec)
+
+mysql> update student set marks=75 where roll=3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from student;
++------+-------+-------+------+------+
+| roll | class | marks | age  | name |
++------+-------+-------+------+------+
+|    1 | FY    | 85.42 |   20 | Riya |
+|    2 | SY    | 74.21 |   21 | Siya |
+|    3 | FY    |    75 |   20 | Ram  |
+|    5 | SY    |  63.4 |   22 | Tiya |
++------+-------+-------+------+------+
+4 rows in set (0.00 sec)
+
+mysql> update student set marks=marks+0.5;
+Query OK, 4 rows affected (0.01 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select * from student;
++------+-------+-------+------+------+
+| roll | class | marks | age  | name |
++------+-------+-------+------+------+
+|    1 | FY    | 85.92 |   20 | Riya |
+|    2 | SY    | 74.71 |   21 | Siya |
+|    3 | FY    |  75.5 |   20 | Ram  |
+|    5 | SY    |  63.9 |   22 | Tiya |
++------+-------+-------+------+------+
+4 rows in set (0.00 sec)
+
+ysql> select * from student;
++------+-------+-------+------+------+
+| roll | class | marks | age  | name |
++------+-------+-------+------+------+
+|    1 | FY    | 85.92 |   20 | Riya |
+|    2 | SY    | 74.71 |   21 | Siya |
+|    3 | FY    |  75.5 |   20 | Ram  |
+|    5 | SY    |  63.9 |   22 | Tiya |
++------+-------+-------+------+------+
+4 rows in set (0.00 sec)
+
+mysql> truncate table student;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from student;
+Empty set (0.00 sec)
+
+mysql> insert into student (roll,class,marks,age,name) values (1,'FY',64.32,20,'Aaron'),(2,'SY',87.65,21,'Sharon'),(3,'FY',54.23,20,'Faron');
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from student;
++------+-------+-------+------+--------+
+| roll | class | marks | age  | name   |
++------+-------+-------+------+--------+
+|    1 | FY    | 64.32 |   20 | Aaron  |
+|    2 | SY    | 87.65 |   21 | Sharon |
+|    3 | FY    | 54.23 |   20 | Faron  |
++------+-------+-------+------+--------+
+3 rows in set (0.00 sec)
+
+mysql> 
+
+
